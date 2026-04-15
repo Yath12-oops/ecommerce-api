@@ -1,5 +1,8 @@
 package com.example.Ecommerce.service;
 
+import com.example.Ecommerce.convertors.CustomerConvertor;
+import com.example.Ecommerce.dto.request.CustomerRequest;
+import com.example.Ecommerce.dto.response.CustomerResponse;
 import com.example.Ecommerce.model.Customer;
 import com.example.Ecommerce.repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +20,14 @@ public class CustomerService {
     CustomerRepo customerRepo;
 
 
-    public String addCustomer(Customer customer){
-        customerRepo.save(customer);
-        return "Customer added succesfully";
+    public CustomerResponse addCustomer(CustomerRequest customerRequest){
+        Customer customer= CustomerConvertor.customerRequestToCustomer(customerRequest);
+
+        Customer savedCustomer=customerRepo.save(customer);
+
+        CustomerResponse customerResponse=CustomerConvertor.customerToCustomerResponse(savedCustomer);
+
+        return customerResponse;
     }
 
     public Customer getCustomer(int id) {

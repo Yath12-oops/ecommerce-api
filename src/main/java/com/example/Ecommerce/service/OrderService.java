@@ -13,8 +13,8 @@ public class OrderService {
     @Autowired
     CustomerRepo customerRepo;
 
-    public void placeOrder(int customerId, List<Integer> productIds){
-
-        Optional<Customer> customerOptional=CustomerRepo.
-    }
+//    public void placeOrder(int customerId, List<Integer> productIds){
+//
+//        Optional<Customer> customerOptional=CustomerRepo.
+//    }
 }

@@ -1,5 +1,7 @@
 package com.example.Ecommerce.controller;
 
+import com.example.Ecommerce.dto.request.CustomerRequest;
+import com.example.Ecommerce.dto.response.CustomerResponse;
 import com.example.Ecommerce.model.Customer;
 import com.example.Ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,8 @@ public class CustomerController {
     CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity addCustomer(@RequestBody Customer customer){
-    String response=customerService.addCustomer((customer));
+    public ResponseEntity addCustomer(@RequestBody CustomerRequest customerRequest){
+    CustomerResponse response=customerService.addCustomer((customerRequest));
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
     @GetMapping

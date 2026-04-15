@@ -16,11 +16,11 @@ public class AadharController {
     @Autowired
     AadharService aadharService;
 
-    @PostMapping
-    public ResponseEntity addAadhar(@RequestParam("aadhar-no") String aadharNo,
-                                    @RequestParam("customer-id") int customerId){
-
-        AadharResponse aadhar=aadharService.addAadhar(aadharNo,customerId);
-
-    }
+//    @PostMapping
+//    public ResponseEntity addAadhar(@RequestParam("aadhar-no") String aadharNo,
+//                                    @RequestParam("customer-id") int customerId){
+//
+//        AadharResponse aadhar=aadharService.addAadhar(aadharNo,customerId);
+//
+//    }
 }

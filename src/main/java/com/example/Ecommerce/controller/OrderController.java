@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
-    @PostMapping
-    public ResponseEntity placeOrder(@RequestParam){
-
-    }
+//    @PostMapping
+//    public ResponseEntity placeOrder(@RequestParam){
+//
+//    }
 }
