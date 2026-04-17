@@ -52,6 +52,10 @@ public class OrderService {
                 throw new ProductNotFoundException("Product out of stock "+orderRequest.getProductId());
             }
             products.add(product);
+
+            int quantity=product.getQuantity();
+            product.setQuantity(quantity- orderRequest.getQuantity());
+
             totalValue+= product.getPrice()*orderRequest.getQuantity();
         }
         OrderEntity order=new OrderEntity();
