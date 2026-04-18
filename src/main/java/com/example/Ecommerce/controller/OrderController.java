@@ -1,6 +1,7 @@
 package com.example.Ecommerce.controller;
 
 import com.example.Ecommerce.dto.request.OrderRequest;
+import com.example.Ecommerce.dto.response.OrderResponse;
 import com.example.Ecommerce.exceptions.CustomerNotFoundException;
 import com.example.Ecommerce.exceptions.ProductNotFoundException;
 import com.example.Ecommerce.service.OrderService;
@@ -32,5 +33,12 @@ public class OrderController {
         catch (ProductNotFoundException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity getOrder(@RequestParam("value") int value){
+
+        List<OrderResponse> response=orderService.getOrder(value);
+        return new ResponseEntity(response,HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.Ecommerce.service;
 
 import com.example.Ecommerce.dto.request.OrderRequest;
+import com.example.Ecommerce.dto.response.OrderResponse;
 import com.example.Ecommerce.exceptions.CustomerNotFoundException;
 import com.example.Ecommerce.exceptions.ProductNotFoundException;
 import com.example.Ecommerce.model.Customer;
@@ -66,5 +67,15 @@ public class OrderService {
         orderRepo.save(order);
 
         return "Order placed Successfully";
+    }
+
+    public List<OrderResponse> getOrder(int value){
+
+        List<OrderEntity> orderEntities=orderRepo.findBytotalValueGreaterThan(value);
+        List<OrderResponse> orderResponses=new ArrayList<>();
+        for(OrderEntity e:orderEntities){
+            orderResponses.add(OrderResponse.builder().orderId(e.getOrderId()).totalValue(e.getTotalValue()).build());
+        }
+        return orderResponses;
     }
 }
