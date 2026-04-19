@@ -2,13 +2,17 @@ package com.example.Ecommerce.controller;
 
 import com.example.Ecommerce.dto.request.ProductRequest;
 import com.example.Ecommerce.dto.response.ProductResponse;
+import com.example.Ecommerce.exceptions.ProductNotFoundException;
 import com.example.Ecommerce.exceptions.SellerNotFoundException;
+import com.example.Ecommerce.model.enums.ProductCategory;
 import com.example.Ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -25,6 +29,18 @@ public class ProductController {
             ProductResponse response = productservice.addProduct(productrequest, sellerId);
             return new ResponseEntity(response, HttpStatus.CREATED);
         }catch (SellerNotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity getProductOfACategory(@RequestParam ("category") ProductCategory productCategory){
+
+        try{
+            List<ProductResponse> response=productservice.getProductOfACategory(productCategory);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }
+        catch(ProductNotFoundException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
