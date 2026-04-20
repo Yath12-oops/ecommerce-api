@@ -51,7 +51,7 @@ public class ProductService {
         }
         List<ProductResponse> productResponses=new ArrayList<>();
         for(Product p:products){
-            productResponses.add(ProductResponse.builder().name(p.getName()).price(p.getPrice()).build());
+            productResponses.add(ProductConvertor.productToProductResponse(p));
         }
         return productResponses;
     }
@@ -66,7 +66,7 @@ public class ProductService {
         List<ProductResponse> responses=new ArrayList<>();
 
         for(Product p:products){
-            responses.add(ProductResponse.builder().name(p.getName()).price(p.getPrice()).build());
+            responses.add(ProductConvertor.productToProductResponse(p));
         }
         return responses;
     }
