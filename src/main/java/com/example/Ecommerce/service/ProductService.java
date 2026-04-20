@@ -55,4 +55,19 @@ public class ProductService {
         }
         return productResponses;
     }
+
+    public List<ProductResponse> getProductInRange(int min,int max){
+
+        List<Product> products=productrepo.findByPriceBetween(min,max);
+
+        if(products.isEmpty()){
+            throw new ProductNotFoundException("No valid product");
+        }
+        List<ProductResponse> responses=new ArrayList<>();
+
+        for(Product p:products){
+            responses.add(ProductResponse.builder().name(p.getName()).price(p.getPrice()).build());
+        }
+        return responses;
+    }
 }

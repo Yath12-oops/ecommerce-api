@@ -44,4 +44,17 @@ public class ProductController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("min/{min}/max/{max}")
+    public ResponseEntity getProductInRange(@PathVariable("min") int min,
+                                            @PathVariable("max") int max){
+        try {
+            List<ProductResponse> response = productservice.getProductInRange(min, max);
+            return new ResponseEntity(response, HttpStatus.OK);
+        }
+        catch (ProductNotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

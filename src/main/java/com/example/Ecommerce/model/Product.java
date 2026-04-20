@@ -1,6 +1,7 @@
 package com.example.Ecommerce.model;
 
 import com.example.Ecommerce.model.enums.ProductCategory;
+import com.jayway.jsonpath.internal.function.numeric.Min;
 import jakarta.persistence.*;
 import lombok.*;
 
