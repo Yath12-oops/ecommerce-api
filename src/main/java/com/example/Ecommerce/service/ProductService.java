@@ -70,4 +70,34 @@ public class ProductService {
         }
         return responses;
     }
+
+    public List<ProductResponse> getOutOfStockProducts(){
+
+        List<Product> products=productrepo.findByQuantity(0);
+        if(products.isEmpty()){
+            throw new ProductNotFoundException("No product is out of stock");
+        }
+
+        List<ProductResponse> responses=new ArrayList<>();
+        for(Product p:products){
+            responses.add(ProductConvertor.productToProductResponse(p));
+        }
+
+        return responses;
+    }
+
+    public List<ProductResponse> getInStockProducts(){
+
+        List<Product> products=productrepo.findByQuantityGreaterThan(0);
+        if(products.isEmpty()){
+            throw new ProductNotFoundException("No product is in stock");
+        }
+
+        List<ProductResponse> responses=new ArrayList<>();
+        for(Product p:products){
+            responses.add(ProductConvertor.productToProductResponse(p));
+        }
+
+        return responses;
+    }
 }

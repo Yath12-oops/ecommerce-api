@@ -56,5 +56,25 @@ public class ProductController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/outOfStock")
+    public ResponseEntity getOutOfStockProducts(){
 
+        try {
+            List<ProductResponse> response = productservice.getOutOfStockProducts();
+            return new ResponseEntity(response, HttpStatus.OK);
+        }catch(ProductNotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/inStock")
+    public ResponseEntity getInStockProducts(){
+
+        try {
+            List<ProductResponse> response = productservice.getInStockProducts();
+            return new ResponseEntity(response, HttpStatus.OK);
+        }catch(ProductNotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 }

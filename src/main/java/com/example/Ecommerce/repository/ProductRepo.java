@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProductRepo extends JpaRepository<Product,Integer> {
     List<Product> findByProductCategory(ProductCategory productCategory);
     List<Product> findByPriceBetween(int min,int max);
+    List<Product> findByQuantity(int quantity);
+    List<Product> findByQuantityGreaterThan(int quantity);
 }
