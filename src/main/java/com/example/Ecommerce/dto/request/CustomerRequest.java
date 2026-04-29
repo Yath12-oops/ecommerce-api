@@ -1,15 +1,13 @@
 package com.example.Ecommerce.dto.request;
 
 import com.example.Ecommerce.model.enums.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CustomerRequest {
 
     private String name;

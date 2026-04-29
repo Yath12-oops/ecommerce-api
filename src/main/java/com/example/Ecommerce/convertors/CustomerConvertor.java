@@ -21,7 +21,7 @@ public class CustomerConvertor {
         return CustomerResponse.builder()
                 .name(customer.getName())
                 .email(customer.getEmail())
-                .ccreatedAt(customer.getCreatedAt())
+                .createdAt(customer.getCreatedAt())
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.example.Ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,5 +21,6 @@ public class Aadhar {
 
     @OneToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer customer;
 }

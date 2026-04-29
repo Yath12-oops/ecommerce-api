@@ -1,5 +1,6 @@
 package com.example.Ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,10 +30,12 @@ public class OrderEntity {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer customer;
 
 
     @ManyToMany
      @JoinTable(name="order_product")
+    @JsonIgnore
     List<Product> products=new ArrayList<>();
 }
