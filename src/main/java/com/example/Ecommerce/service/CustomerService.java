@@ -8,6 +8,8 @@ import com.example.Ecommerce.repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,15 +21,26 @@ public class CustomerService {
     @Autowired
     CustomerRepo customerRepo;
 
+    @Autowired
+    JavaMailSender javaMailSender;
 
     public CustomerResponse addCustomer(CustomerRequest customerRequest){
         Customer customer= CustomerConvertor.customerRequestToCustomer(customerRequest);
 
         Customer savedCustomer=customerRepo.save(customer);
+        sendEmail(savedCustomer);
+        return CustomerConvertor.customerToCustomerResponse(savedCustomer);
+    }
 
-        CustomerResponse customerResponse=CustomerConvertor.customerToCustomerResponse(savedCustomer);
+    private void sendEmail(Customer savedCustomer) {
+        String body="Hi"+savedCustomer.getName()+"your profile has been created successfully at"+savedCustomer.getCreatedAt();
+        SimpleMailMessage message=new SimpleMailMessage();
+        message.setSubject("Registration Successfully on the platform");
+        message.setFrom("sachdevayatharth12@gmail.com");
+        message.setTo(savedCustomer.getEmail());
+        message.setText(body);
 
-        return customerResponse;
+        javaMailSender.send(message);
     }
 
     public Customer getCustomer(int id) {
